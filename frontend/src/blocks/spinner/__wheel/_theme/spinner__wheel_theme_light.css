@@ -1,0 +1,11 @@
+.spinner__wheel_theme_light {
+  border: 5px solid #eee;
+  border-top: 5px solid #000;
+}
+
+@media (min-width: 520px) {
+  .spinner__wheel_theme_light {
+    border: 8px solid #eee;
+    border-top: 8px solid #000;
+  }
+}

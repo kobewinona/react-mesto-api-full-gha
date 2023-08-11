@@ -1,0 +1,17 @@
+.burger {
+  width: 24px;
+  height: 21px;
+  
+  cursor: pointer;
+  
+  overflow: hidden;
+  
+  transition: opacity .4s ease-out;
+}
+
+.burger:hover {
+  opacity: .6;
+  
+  transition: opacity .2s ease-in;
+}
+

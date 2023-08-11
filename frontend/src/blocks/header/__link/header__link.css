@@ -1,0 +1,15 @@
+.header__link {
+  color: #fff;
+  font-size: clamp(14px, 5vw, 18px);
+  font-weight: 400;
+  line-height: clamp(17px, 6vw, 22px);
+  text-decoration: none;
+  
+  transition: color .4s ease-out;
+}
+
+.header__link:hover {
+  color: rgba(255, 255, 255, .6);
+  
+  transition: color .2s ease-in;
+}

@@ -1,0 +1,25 @@
+.header__account-button {
+  color: #fff;
+  
+  background: transparent;
+  
+  cursor: pointer;
+  
+  margin: 18px 0 0;
+  border: none;
+  
+  transition: opacity .4s ease-out;
+}
+
+.header__account-button:hover {
+  opacity: .6;
+  
+  transition: opacity .2s ease-in;
+}
+
+@media (min-width: 768px) {
+  .header__account-button {
+    margin: 0;
+  }
+  
+}

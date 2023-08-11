@@ -1,0 +1,16 @@
+.auth {
+  width: calc(100% - (30px * 2));
+  max-width: 358px;
+  height: 100%;
+  
+  display: grid;
+  grid-template-rows: max-content auto 77px;
+  
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .auth {
+    grid-template-rows: max-content auto 112px;
+  }
+}

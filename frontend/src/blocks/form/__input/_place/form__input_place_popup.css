@@ -1,0 +1,13 @@
+.form__input_place_popup {
+  width: calc(100% - (22px * 2));
+  
+  color: #000;
+  
+  margin: 0 auto 5px;
+  padding: 0 0 9px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+.form__input::placeholder {
+  color: #c4c4c4;
+}

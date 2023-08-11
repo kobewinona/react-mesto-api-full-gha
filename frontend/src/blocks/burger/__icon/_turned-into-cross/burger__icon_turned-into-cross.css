@@ -1,0 +1,17 @@
+.burger__icon_turned-into-cross {
+  animation: turnIntoCross .2s forwards cubic-bezier(.55,.06,.68,.19) .2s;
+}
+
+.burger__icon_turned-into-cross:before {
+  transform: translate(0, 0);
+  
+  transition: transform .2s cubic-bezier(.55,.06,.68,.19);
+  transition-delay: 0s;
+}
+
+.burger__icon_turned-into-cross:after {
+  transform: translate(0, 0) rotate(90deg);
+  
+  transition: transform .2s cubic-bezier(.55,.06,.68,.19);
+  transition-delay: 0s;
+}

@@ -1,0 +1,11 @@
+.spinner__wheel_size_small {
+  width: 22px;
+  height: 22px;
+}
+
+@media (min-width: 520px) {
+  .spinner__wheel_size_small {
+    width: 25px;
+    height: 25px;
+  }
+}

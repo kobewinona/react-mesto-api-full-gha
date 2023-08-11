@@ -1,0 +1,14 @@
+.auth__title {
+  font-size: clamp(20px, 5.5vw, 24px);
+  font-weight: 900;
+  line-height: clamp(24px, 6vw, 29px);
+  text-align: center;
+  
+  margin: 40px auto 40px;
+}
+
+@media (min-width: 768px) {
+  .auth__title {
+    margin: 60px auto 50px;
+  }
+}

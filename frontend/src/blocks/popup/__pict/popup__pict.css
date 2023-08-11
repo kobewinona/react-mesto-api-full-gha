@@ -1,0 +1,14 @@
+.popup__pict {
+  width: 120px;
+  height: 120px;
+  
+  display: block;
+  
+  margin: 0 auto 40px auto;
+}
+
+@media (min-width: 768px) {
+  .popup__pict {
+    margin: 0 auto 32px auto;
+  }
+}

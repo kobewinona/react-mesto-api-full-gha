@@ -1,0 +1,16 @@
+.form__submit_place_popup {
+  width: calc(100% - (22px * 2));
+  
+  color: #fff;
+  font-size: clamp(14px, 3vw, 18px);
+  line-height: clamp(17px, 4vw, 22px);
+  
+  background-color: #000;
+  
+  margin: 0 auto;
+  border: 1px solid #000;
+}
+
+.form__submit_place_popup:hover {
+  opacity: .8;
+}

@@ -1,0 +1,21 @@
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  margin: 28px 30px 28px 30px;
+}
+
+@media (min-width: 375px) {
+  .header__container {
+    margin: 28px auto 28px auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .header__container {
+    width: 100%;
+  
+    margin: 45px auto 41px auto;
+  }
+}

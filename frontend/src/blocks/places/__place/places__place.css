@@ -1,0 +1,9 @@
+.places__place {
+  background-color: #fff;
+  background-clip: border-box;
+  
+  position: relative;
+  
+  margin: 0;
+  border-radius: 10px;
+}

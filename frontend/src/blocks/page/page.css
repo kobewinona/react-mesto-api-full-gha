@@ -1,0 +1,21 @@
+.page {
+  min-height: 100vh;
+  
+  color: #fff;
+  font-family: 'Inter', Tahoma, sans-serif;
+  font-style: normal;
+  
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: max-content auto max-content;
+  
+  background-color: #000;
+  
+  margin: 0;
+  padding: 0;
+  
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+}

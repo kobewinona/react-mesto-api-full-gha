@@ -1,0 +1,9 @@
+.spinner__container_size_small {
+  height: 45px;
+}
+
+@media (min-width: 520px) {
+  .spinner__container_size_small {
+    height: 50px;
+  }
+}

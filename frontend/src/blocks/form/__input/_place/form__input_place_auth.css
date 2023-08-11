@@ -1,0 +1,15 @@
+.form__input_place_auth {
+  width: 100%;
+  
+  color: #fff;
+  
+  background-color: #000;
+  
+  margin: 0 auto 30px;
+  padding: 0 0 12px 0;
+  border-bottom: 2px solid #ccc;
+}
+
+.form__input_place_auth::placeholder {
+  color: #ccc;
+}

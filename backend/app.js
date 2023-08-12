@@ -7,10 +7,13 @@ const { errors } = require('celebrate');
 const indexRouter = require('./routes/index');
 const NotFoundError = require('./errors/not-found-err');
 const handleError = require('./middlewares/errorHandler');
+const handleCors = require('./middlewares/corsHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3005 } = process.env;
 const app = express();
+
+app.use(handleCors);
 
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 

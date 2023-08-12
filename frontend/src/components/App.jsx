@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 
 import * as api from '../utils/api';
-import * as auth from '../utils/auth';
+// import * as auth from '../utils/auth';
 import {AuthContext} from '../contexts/AuthContext';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
@@ -66,8 +66,11 @@ const App = () => {
     setIsLoading(true);
     setIsUpdating(true);
     
-    auth.register(userInfo)
-      .then(() => {
+    console.log('userInfo', userInfo);
+    
+    api.register(userInfo)
+      .then((res) => {
+        console.log('res body', res.body);
         setIsAuthSuccessful(true);
         handleInfoToolTip();
   
@@ -77,7 +80,7 @@ const App = () => {
         setIsAuthSuccessful(false);
         handleInfoToolTip();
         
-        console.log(err);
+        console.log('error', err);
       })
       .finally(() => {
         setIsLoading(false);
@@ -91,7 +94,7 @@ const App = () => {
     setIsLoading(true);
     setIsUpdating(true);
     
-    auth.authorize(userInfo)
+    api.authorize(userInfo)
       .then(data => {
         localStorage.setItem('jwt', data['token']);
         
@@ -117,7 +120,7 @@ const App = () => {
     if (jwt) {
       setIsUpdating(true);
       
-      auth.getContent(jwt)
+      api.getUserInfo(jwt)
         .then(res => {
           setAuthInfo({...authInfo,
             isLoggedIn: true,

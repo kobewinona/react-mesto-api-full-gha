@@ -8,6 +8,7 @@ const setRequest = (url, config) => {
 }
 
 const returnRes = res => {
+  console.log('res in returnRes', res);
   if (res.ok) {
     return res.json();
   } else {
@@ -18,11 +19,38 @@ const returnRes = res => {
 
 // set user info request
 
+export const register = ({email, password}) => {
+  return setRequest(`${apiConfig['url']}/sign-up`, {
+    method: 'POST',
+    headers: apiConfig['headers'],
+    body: JSON.stringify({email, password})
+  }).then(res => returnRes(res))
+};
+
+export const authorize = ({email, password}) => {
+  return setRequest(`${apiConfig['url']}/sign-in`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: apiConfig['headers'],
+    body: JSON.stringify({email, password})
+  }).then(res => returnRes(res));
+};
+
+
+// set user info request
+
 export const getUserInfo = () => {
   return setRequest(`${apiConfig['url']}/users/me`, {
-    headers: apiConfig['headers']
+    method: 'GET',
+    headers: {...apiConfig['headers']}
   }).then(res => returnRes(res));
-}
+};
+
+// export const getUserInfo = () => {
+//   return setRequest(`${apiConfig['url']}/users/me`, {
+//     headers: apiConfig['headers']
+//   }).then(res => returnRes(res));
+// }
 
 export const patchUserAvatar = ({avatar}) => {
   return setRequest(`${apiConfig['url']}/users/me/avatar`, {

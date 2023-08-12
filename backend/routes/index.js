@@ -14,7 +14,7 @@ const {
 
 // auth routes
 
-router.post('/signup', celebrate({
+router.post('/sign-up', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
@@ -23,7 +23,7 @@ router.post('/signup', celebrate({
     avatar: Joi.string().pattern(urlRegex),
   }),
 }, { abortEarly: false }), createUser);
-router.post('/signin', celebrate({
+router.post('/sign-in', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),

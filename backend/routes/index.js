@@ -15,7 +15,7 @@ const {
 
 // auth routes
 
-router.post('/sign-up', celebrate({
+router.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
@@ -24,13 +24,13 @@ router.post('/sign-up', celebrate({
     avatar: Joi.string().pattern(urlRegex),
   }),
 }, { abortEarly: false }), createUser);
-router.post('/sign-in', celebrate({
+router.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }, { abortEarly: false }), login);
-router.post('/sign-out', logout);
+router.post('/signout', logout);
 
 // auth middleware
 

@@ -19,7 +19,7 @@ const returnRes = res => {
 // set user info request
 
 export const register = ({email, password}) => {
-  return setRequest(`${apiConfig['url']}/sign-up`, {
+  return setRequest(`${apiConfig['url']}/signup`, {
     method: 'POST',
     headers: apiConfig['headers'],
     body: JSON.stringify({email, password})
@@ -27,7 +27,7 @@ export const register = ({email, password}) => {
 };
 
 export const authorize = ({email, password}) => {
-  return setRequest(`${apiConfig['url']}/sign-in`, {
+  return setRequest(`${apiConfig['url']}/signin`, {
     method: 'POST',
     credentials: 'include',
     headers: apiConfig['headers'],
@@ -36,7 +36,7 @@ export const authorize = ({email, password}) => {
 };
 
 export const logout = () => {
-  return setRequest(`${apiConfig['url']}/sign-out`, {
+  return setRequest(`${apiConfig['url']}/signout`, {
     method: 'POST',
     credentials: 'include',
     headers: apiConfig['headers']

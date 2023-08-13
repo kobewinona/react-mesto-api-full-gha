@@ -5,11 +5,13 @@ const User = require('../models/user');
 const { OK } = require('../utils/statusCodes');
 
 const login = (req, res, next) => {
+  const { NODE_ENV, JWT_SECRET } = process.env;
+
   User.findUserByCredentials(req.body)
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        'some-secret-key',
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
 

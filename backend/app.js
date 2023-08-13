@@ -1,4 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
+
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -10,13 +12,12 @@ const handleError = require('./middlewares/errorHandler');
 const handleCors = require('./middlewares/corsHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const { PORT = 3005 } = process.env;
+const { PORT, MONGO_DB_URL } = process.env;
 const app = express();
 
 app.use(handleCors);
 
-mongoose.connect('mongodb://localhost:27017/mestodb');
-// mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
+mongoose.connect(MONGO_DB_URL);
 
 app.use(express.json());
 app.use(cookieParser());

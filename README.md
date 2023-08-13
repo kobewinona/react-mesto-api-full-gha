@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.77.216
+IP 158.160.77.216
 
 Frontend https://klimkin-mesto.nomoreparties.co/
 

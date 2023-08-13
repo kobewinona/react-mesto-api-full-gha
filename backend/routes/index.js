@@ -4,6 +4,7 @@ const { celebrate, Joi } = require('celebrate');
 
 const { urlRegex, idRegex } = require('../utils/regex');
 const login = require('../controllers/login');
+const logout = require('../controllers/logout');
 const auth = require('../middlewares/auth');
 const {
   getUsers, getCurrentUser, getUser, updateUserInfo, updateUserAvatar, createUser,
@@ -29,6 +30,7 @@ router.post('/sign-in', celebrate({
     password: Joi.string().required(),
   }),
 }, { abortEarly: false }), login);
+router.post('/sign-out', logout);
 
 // auth middleware
 

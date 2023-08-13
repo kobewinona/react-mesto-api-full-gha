@@ -8,8 +8,8 @@ const Card = ({card, onCardClick, onCardLikeClick, onCardDeleteClick}) => {
   
   const [isPlaceLoaded, setIsPlaceLoaded] = useState(false);
   
-  const isOwner = currentUser['_id'] === card['owner']['_id'];
-  const isLiked = card['likes'].some(like => like['_id'] === currentUser['_id']);
+  const isOwner = currentUser['_id'] === card['owner'];
+  const isLiked = card['likes'].some(like => like === currentUser['_id']);
   
   const handlePlaceLoad = () => {
     setIsPlaceLoaded(true);

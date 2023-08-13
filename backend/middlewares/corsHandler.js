@@ -15,8 +15,9 @@ module.exports = (req, res, next) => {
   if (req.method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', ALLOWED_METHODS);
     res.header('Access-Control-Allow-Headers', requestHeaders);
-    res.end();
+    res.header('Access-Control-Max-Age', '500');
+    return res.end();
   }
 
-  next();
+  return next();
 };

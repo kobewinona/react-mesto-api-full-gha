@@ -2,7 +2,6 @@ import {useState, useEffect} from 'react';
 import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 
 import * as api from '../utils/api';
-// import * as auth from '../utils/auth';
 import {AuthContext} from '../contexts/AuthContext';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
@@ -27,7 +26,7 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   
   const [isAuthSuccessful, setIsAuthSuccessful] = useState(false);
-  const [authInfo, setAuthInfo] = useState({isLoggedIn: true, userEmail: ''});
+  const [authInfo, setAuthInfo] = useState({isLoggedIn: false, userEmail: ''});
   
   const [isPopupOpen, setIsPopupOpen] = useState({
     editAvatarPopup: false,
@@ -46,18 +45,15 @@ const App = () => {
   const [selectedCard, setSelectedCard] = useState({});
   const [cardToDelete, setCardToDelete] = useState({});
   
-  
-  // set initial current user info and initial cards
-  
-  useEffect(() => {
+  const loadMainContent = () => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then(([userData, initialCards]) => {
         setCurrentUser(userData);
-        setCards(initialCards);
+        setCards(initialCards.reverse());
       })
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
-  }, []);
+  }
   
   
   // handle registration and authorization
@@ -66,43 +62,16 @@ const App = () => {
     setIsLoading(true);
     setIsUpdating(true);
     
-    console.log('userInfo', userInfo);
-    
     api.register(userInfo)
-      .then((res) => {
-        console.log('res body', res.body);
+      .then(() => {
         setIsAuthSuccessful(true);
-        handleInfoToolTip();
+        openInfoToolTip();
   
-        navigate('/sign-in', {replace: true})
+        navigate('/sign-in', {replace: true});
       })
       .catch(err => {
         setIsAuthSuccessful(false);
-        handleInfoToolTip();
-        
-        console.log('error', err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-        setIsUpdating(false);
-      });
-  
-    // eslint-disable-next-line
-  };
-  
-  const handleSignIn = userInfo => {
-    setIsLoading(true);
-    setIsUpdating(true);
-    
-    api.authorize(userInfo)
-      .then(data => {
-        localStorage.setItem('jwt', data['token']);
-        
-        checkToken();
-      })
-      .catch(err => {
-        setIsAuthSuccessful(false);
-        handleInfoToolTip();
+        openInfoToolTip();
         
         console.log(err);
       })
@@ -110,60 +79,79 @@ const App = () => {
         setIsLoading(false);
         setIsUpdating(false);
       });
-  
-    // eslint-disable-next-line
   };
   
-  const checkToken = () => {
-    const jwt = localStorage.getItem('jwt');
+  const handleSignIn = userInfo => {
+    setIsLoading(true);
+    setIsUpdating(true);
     
-    if (jwt) {
-      setIsUpdating(true);
-      
-      api.getUserInfo(jwt)
-        .then(res => {
-          setAuthInfo({...authInfo,
-            isLoggedIn: true,
-            userEmail: res.data.email
-          });
-          
-          navigate('/', {replace: true});
-        })
-        .catch(err => console.log(err))
-        .finally(() => setIsUpdating(false));
-    } else {
-      setAuthInfo({...authInfo,
-        isLoggedIn: false,
-        userEmail: ''
+    api.authorize(userInfo)
+      .then(() => {
+        validateCredentials();
+  
+        navigate('/', {replace: true});
+      })
+      .catch(err => {
+        setIsAuthSuccessful(false);
+        openInfoToolTip();
+        
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setIsUpdating(false);
       });
-    }
+  };
+  
+  const handleSignOut = () => {
+    api.logout()
+      .then(() => {
+        setAuthInfo({...authInfo, isLoggedIn: false});
+        
+        validateCredentials();
+        
+        navigate('/sign-in', {replace: true});
+      })
+      .catch(err => console.log(err))
+  };
+  
+  const validateCredentials = () => {
+    api.getUserInfo()
+      .then(res => {
+        setAuthInfo({...authInfo,
+          isLoggedIn: true,
+          userEmail: res.email
+        });
+      
+        loadMainContent();
+      
+        navigate('/', {replace: true});
+      })
+      .catch(err => {
+        setAuthInfo({...authInfo, isLoggedIn: false});
+  
+        navigate('/sign-in', {replace: true});
+        
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setIsUpdating(false);
+      });
   };
   
   useEffect(() => {
-    checkToken();
-  
+    validateCredentials();
+    
     // eslint-disable-next-line
   }, []);
   
   
-  // handle sign out
+  // handle tooltip
   
-  const handleSignOut = () => {
-    localStorage.removeItem('jwt');
-    checkToken();
-    
-    navigate('/sign-in');
-  };
-  
-  
-  // handle open tooltip
-  
-  const handleInfoToolTip = () => {
+  const openInfoToolTip = () => {
     setIsInfoToolTipOpen(true);
   };
-  
-  
-  // handle close info tooltip
   
   const closeInfoToolTip = () => {
     setIsInfoToolTipOpen(false);
@@ -226,7 +214,7 @@ const App = () => {
   };
   
   const handleCardLikeClick = card => {
-    const isLiked = card['likes'].some(like => like['_id'] === currentUser['_id']);
+    const isLiked = card['likes'].some(like => like === currentUser['_id']);
   
     api.changeLikeCardStatus(card['_id'], isLiked)
       .then(newCard => setCards(cards.map(c => c['_id'] === card['_id'] ? newCard : c)))

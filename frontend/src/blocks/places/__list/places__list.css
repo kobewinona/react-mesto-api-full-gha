@@ -1,6 +1,4 @@
 .places__list {
-  min-height: 100vh;
-  
   list-style: none;
   
   display: grid;

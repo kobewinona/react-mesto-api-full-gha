@@ -1,6 +1,7 @@
 .places {
   width: calc(100% - (19px * 2));
   max-width: 345px;
+  min-height: 100vh;
   
   margin: 0 auto;
 }

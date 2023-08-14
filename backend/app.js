@@ -5,6 +5,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
 const indexRouter = require('./routes/index');
 const NotFoundError = require('./errors/not-found-err');
@@ -19,6 +21,8 @@ const {
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 app.use(handleCors);
 
 mongoose.connect(MONGO_DB_URL);
@@ -26,6 +30,13 @@ mongoose.connect(MONGO_DB_URL);
 app.use(express.json());
 app.use(cookieParser());
 app.use(requestLogger);
+app.use(helmet());
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+}));
 
 app.get('/crash-test', () => {
   setTimeout(() => {

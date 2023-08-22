@@ -38,12 +38,6 @@ app.use(rateLimit({
   legacyHeaders: false,
 }));
 
-app.get('/crash-test', () => {
-  setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
-  }, 0);
-});
-
 app.use('/', indexRouter);
 
 app.use(errorLogger);

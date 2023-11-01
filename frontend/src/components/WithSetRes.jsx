@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 
 const WithSetRes = ({element: Component, ...props}) => {
   const higherRes = 768;
-  const [isMobile, setIsMobile] = useState();
+  const [isMobile, setIsMobile] = useState(false);
   
   const handleResize = () => {
     if (window.innerWidth <= higherRes) {
